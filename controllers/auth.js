@@ -39,7 +39,7 @@ const login = async(req, res) => {
 
         const { users } = await client.queryUsers({ name: username }); //query users in the database to see if there's a match.
 
-        if (!users.length()) return res.status(404).json({message: 'user not found'});
+        if(!users.length) return res.status(400).json({message: 'user not found'});
 
         const success = await bcrypt.compare(password, users[0].hashedPassword); //decrypt password and see if it match user's password.
 
